@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}About{% endblock %}
+
+{% block content %}
+<style>
+    .about {
+        text-align: justify;
+        margin-top: 2%;
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+    .about h1{
+        text-align: center;
+    }
+    .info{
+        display: flex;
+        justify-content: space-between;
+        
+    }
+    .img{
+        width: 50%;
+        text-align: center;
+        
+    }
+    .img img{
+        width: 50%;
+        height: auto;
+        border-radius: 50%;
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        left:50%;
+       
+    }
+    .basic{
+        width: 50%;
+        margin-left: 20px;
+        align-items: center;
+        text-align: left;
+    }
+    .container1{
+        display: flex;
+        justify-content: space-between;
+    }
+    .lang{font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f4f4f9;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 50%;
+        }
+    .progress-container {
+            width: 100%;
+            max-width: 400px;
+            background: #e0e0e0;
+            border-radius: 25px;
+            overflow: hidden;
+            margin-bottom: 20px;
+
+        }
+
+        .progress-bar {
+            height: 25px;
+            border-radius: 25px;
+            text-align: center;
+            color: white;
+            line-height: 25px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-bar-html {
+            width: 80%;
+            background: #f16529;
+        }
+
+        .progress-bar-css {
+            width: 70%;
+            background: #2965f1;
+        }
+
+        .progress-bar-js {
+            width: 60%;
+            background: #f0db4f;
+            color: #323330;
+        }
+
+        .language-title {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .skills{
+            width: 40%;
+            background: #f4f4f9;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        @media(max-width: 768px) {
+            .info{
+                flex-direction: column;
+                align-items: center;
+            }
+            .img{
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            .basic{
+                width: 100%;
+                margin-left: 1%;
+                padding: 2%;
+            }
+            .skills{
+                width: 100%;
+            }
+            .container1{
+                flex-direction: column;
+                align-items: center;
+            }
+            .lang{
+                width: 100%;
+            }
+            .skills{
+                margin-top: 20px;
+                width: 100%;
+            }
+        }
+</style>
+<section class="about">
+    <h1>{{ about.title }}</h1>
+    <div class="info">
+        <div class="img">
+            <img src="{{ about.image.url }}" alt="#" />
+            <h3>Sujan Lamichhane</h3>
+            <p>Author, Researcher & Agriculturist</p>
+            <a href="https://www.linkedin.com/in/sujan-lamichhane/" class="me-3"><i class="fa-brands fa-linkedin" style="color: rgb(8, 140, 255);"></i></a>         
+            <a href="https://twitter.com/sujan_lamichhane" class="me-3"><i class="fa-brands fa-twitter" style="color: rgb(0, 136, 255);"></i></a>
+            <a href="https://www.instagram.com/sujan_lamichhane786/" class="me-3"><i class="fa-brands fa-instagram" style="color: rgb(0, 110, 206);"></i></a>
+                    
+        </div>
+        <div class="basic">
+            <p><i class="fa fa-envelope"></i> lamichhanesujan629@gmail.com</p>
+            
+            <p><i class="fa-brands fa-orcid"></i> <a href="https://orcid.org/0009-0008-7181-9095">0009-0008-7181-9095</a></p>
+            <div class="container1">
+            <div class="lang">
+                <div>
+                    <div class="language-title">HTML</div>
+                    <div class="progress-container">
+                        <div class="progress-bar progress-bar-html">80%</div>
+                    </div>
+                </div>
+            
+                <div>
+                    <div class="language-title">CSS</div>
+                    <div class="progress-container">
+                        <div class="progress-bar progress-bar-css">70%</div>
+                    </div>
+                </div>
+            
+                <div>
+                    <div class="language-title">JavaScript</div>
+                    <div class="progress-container">
+                        <div class="progress-bar progress-bar-js">60%</div>
+                    </div>
+                </div>
+            </div>
+            <div class="skills">
+                <h3>Skills</h3>
+                <ul>
+                    
+                    <li>Communication</li>
+                    <li>Leadership</li>
+                    <li>Data Analysis</li>
+                    <li>Project Management</li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</div>
+
+    <p>{{ about.content | linebreaks }}</p>
+    
+</section>
+{% endblock %}
