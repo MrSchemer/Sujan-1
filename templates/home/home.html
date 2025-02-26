@@ -3,13 +3,245 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
+<style>
+    .hero-btn {
+        color: rgb(32, 160, 0);
+        
+    }
+    .hero-btn:hover {
+        background-color: green;
+        color: rgb(0, 0, 0);
+    }
+    
+    .section {
+        padding: 60px 0;
+    }
+
+    .section-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+
+    .card {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        height: 100%; /* Ensure cards take full height */
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-img-top {
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .card-body {
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 0.75rem;
+    }
+
+    .card-text {
+        font-size: 0.9rem;
+        color: #555;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+    }
+
+    .btn-primary {
+        background: #3c8dbc;
+        border: none;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        transition: background 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background: #296282;
+    }
+
+    /* Center cards in the row */
+    .row-centered {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .col-centered {
+        display: flex;
+        justify-content: center;
+    }
+</style>
+
+<!-- Hero Section -->
 <section class="header">
     <div class="text-box">
-        <img src="{% static 'images/profile.jpg' %}" alt="#" />
+        <img src="{% static 'images/profile.jpg' %}" alt="Sujan Lamichhane" />
         <h1>Sujan Lamichhane</h1>
         <p>Author, Researcher & Agriculturist</p>
-        <a href="" class="hero-btn">About Me</a>
-        <a href="" class="hero-btn">Contact Me</a>
+        <a href="{% url 'home:about' %}" class="hero-btn">About Me</a>
+        <a href="{% url 'home:contact' %}" class="hero-btn">Contact Me</a>
     </div>
- </section>
+</section>
+
+<!-- Featured Blogs Section -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">Featured Blogs</h2>
+        <div class="row row-centered g-4">
+            {% for blog in blogs %}
+            <div class="col-md-4 col-centered">
+                <div class="card">
+                    {% if blog.image %}
+                    <img src="{{ blog.image.url }}" class="card-img-top" alt="{{ blog.title }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h3 class="card-title">{{ blog.title }}</h3>
+                        <p class="card-text">{{ blog.content | truncatewords:30 | safe }}</p>
+                        <a href="{% url 'home:blog_details' blog.id %}" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p class="text-muted">No featured blogs available.</p>
+            </div>
+            {% endfor %}
+        </div>
+        <center><a href="{% url 'home:blog' %}" class="hero-btn" style="margin-bottom: 20px;margin-top: 20px;">View All Blogs</a></center>
+    </div>
+</section>
+
+<!-- Publications Section -->
+<section class="section bg-light">
+    <div class="container">
+        <h2 class="section-title">Publications</h2>
+        <div class="row row-centered g-4">
+            {% for publication in Publications %}
+            <div class="col-md-4 col-centered">
+                <div class="card">
+                    {% if publication.image %}
+                    <img src="{{ publication.image.url }}" class="card-img-top" alt="{{ publication.title }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h3 class="card-title">{{ publication.title }}</h3>
+                        <p class="card-text">{{ publication.content | truncatewords:30 | safe }}</p>
+                        <a href="#" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p class="text-muted">No publications available.</p>
+            </div>
+            {% endfor %}
+        </div>
+        <center><a href="{% url 'home:publication' %}" class="hero-btn" style="margin-bottom: 20px;margin-top: 20px;">View All Publications</a></center>
+    </div>
+</section>
+
+<!-- Research Section -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">Research</h2>
+        <div class="row row-centered g-4">
+            {% for research_item in research %}
+            <div class="col-md-4 col-centered">
+                <div class="card h-100">
+                    {% if research_item.image %}
+                    <img src="{{ research_item.image.url }}" class="card-img-top" alt="{{ research_item.title }}">
+                    {% else %}
+                    <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                        <i class="fas fa-flask fa-3x text-muted"></i> <!-- Fallback icon -->
+                    </div>
+                    {% endif %}
+                    <div class="card-body d-flex flex-column">
+                        <h3 class="card-title">{{ research_item.title }}</h3>
+                        <p class="card-text flex-grow-1">{{ research_item.content | truncatewords:30 | safe }}</p>
+                        <a href="{{ research_item.url }}" target="_blank" class="btn btn-primary mt-auto">Read More</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p class="text-muted">No research available.</p>
+            </div>
+            {% endfor %}
+        </div>
+        <center><a href="{% url 'home:research' %}" class="hero-btn" style="margin-bottom: 20px;margin-top: 20px;">View All Research</a></center>
+    </div>
+</section>
+
+<!-- Organizations Section -->
+<section class="section bg-light">
+    <div class="container">
+        <h2 class="section-title">Organizations</h2>
+        <div class="row row-centered g-4">
+            {% for org in organizations %}
+            <div class="col-md-4 col-centered">
+                <div class="card">
+                    {% if org.image %}
+                    <img src="{{ org.image.url }}" class="card-img-top" alt="{{ org.title }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h3 class="card-title">{{ org.organization }}</h3>
+                        <h5 class="card-subtitle">{{ org.position }}</h5>
+                        <p class="card-text">{{ org.description | truncatewords:30 | safe }}</p>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p class="text-muted">No organizations available.</p>
+            </div>
+            {% endfor %}
+        </div>
+        <center><a href="{% url 'home:organizations' %}" class="hero-btn" style="margin-bottom: 20px;margin-top: 20px;">View All Organizations</a></center>
+    </div>
+</section>
+
+<!-- Honors & Awards Section -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">Honors & Awards</h2>
+        <div class="row row-centered g-4">
+            {% for honor in honors %}
+            <div class="col-md-4 col-centered">
+                <div class="card">
+                    {% if honor.image %}
+                    <img src="{{ honor.image.url }}" class="card-img-top" alt="{{ honor.organization }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h3 class="card-title">{{ honor.organization }}</h3>
+                        <h5 class="card-subtitle">{{ honor.position }}</h5>
+                        <p class="card-text">{{ honor.description | truncatewords:30 | safe }}</p>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p class="text-muted">No honors or awards available.</p>
+            </div>
+            {% endfor %}
+        </div>
+        <center><a href="{% url 'home:honor' %}" class="hero-btn" style="margin-bottom: 20px;margin-top: 20px;">View All Honors & Awards</a></center>
+    </div>
+</section>
 {% endblock %}

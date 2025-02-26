@@ -5,10 +5,9 @@
 {% block content %}
 <style>
     .about {
-        text-align: justify;
         margin-top: 2%;
-        margin-left: 2%;
-        margin-right: 2%;
+        margin-left: 3%;
+        margin-right: 3%;
     }
     .about h1{
         text-align: center;
@@ -68,12 +67,12 @@
         }
 
         .progress-bar-html {
-            width: 80%;
+            width: 95%;
             background: #f16529;
         }
 
         .progress-bar-css {
-            width: 70%;
+            width: 90%;
             background: #2965f1;
         }
 
@@ -88,6 +87,7 @@
             font-weight: bold;
         }
         .skills{
+            padding: 2%;
             width: 40%;
             background: #f4f4f9;
             border-radius: 5px;
@@ -124,7 +124,61 @@
         }
 </style>
 <section class="about">
+    {% if about %}
     <h1>{{ about.title }}</h1>
+    <div class="info">
+        <div class="img">
+            <img src="{{ about.image.url }}" alt="#" />
+            <h3>Sujan Lamichhane</h3>
+            <p>{{ about.tagline }}</p>
+            <a href="https://www.linkedin.com/in/sujan-lamichhane/" class="me-3"><i class="fa-brands fa-linkedin" style="color: rgb(8, 140, 255);"></i></a>         
+            <a href="https://twitter.com/sujan_lamichhane" class="me-3"><i class="fa-brands fa-twitter" style="color: rgb(0, 136, 255);"></i></a>
+            <a href="https://www.instagram.com/sujan_lamichhane786/" class="me-3"><i class="fa-brands fa-instagram" style="color: rgb(0, 110, 206);"></i></a>
+                    
+        </div>
+        <div class="basic">
+            <p><i class="fa fa-envelope"></i> lamichhanesujan629@gmail.com</p>
+            
+            <p><i class="fa-brands fa-orcid"></i> <a href="https://orcid.org/0009-0008-7181-9095">0009-0008-7181-9095</a></p>
+            <div class="container1">
+            <div class="lang">
+                <div>
+                    <div class="language-title">Nepali</div>
+                    <div class="progress-container">
+                        <div class="progress-bar progress-bar-html" style="width: {{ about.Nepali }}%;">{{ about.Nepali }}%</div>
+                    </div>
+                </div>
+            
+                <div>
+                    <div class="language-title">English</div>
+                    <div class="progress-container">
+                        <div class="progress-bar progress-bar-css" style="width: {{ about.English }}%;">{{ about.English }}%</div>
+                    </div>
+                </div>
+            
+                <div>
+                    <div class="language-title">Hindi</div>
+                    <div class="progress-container">
+                        <div class="progress-bar progress-bar-js" style="width: {{ about.Hindi }}%;">{{ about.Hindi }}%</div>
+                    </div>
+                </div>
+            </div>
+            <div class="skills">
+                <h3>Skills</h3>
+                <ul>
+                    {{ about.Skills | safe }}
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</div>
+
+    <p>{{ about.content | safe }}</p>
+
+    {% else %}
+    <h1>About Me</h1>
     <div class="info">
         <div class="img">
             <img src="{{ about.image.url }}" alt="#" />
@@ -142,21 +196,21 @@
             <div class="container1">
             <div class="lang">
                 <div>
-                    <div class="language-title">HTML</div>
+                    <div class="language-title">Nepali</div>
                     <div class="progress-container">
-                        <div class="progress-bar progress-bar-html">80%</div>
+                        <div class="progress-bar progress-bar-html">95%</div>
                     </div>
                 </div>
             
                 <div>
-                    <div class="language-title">CSS</div>
+                    <div class="language-title">English</div>
                     <div class="progress-container">
-                        <div class="progress-bar progress-bar-css">70%</div>
+                        <div class="progress-bar progress-bar-css">90%</div>
                     </div>
                 </div>
             
                 <div>
-                    <div class="language-title">JavaScript</div>
+                    <div class="language-title">Hindi</div>
                     <div class="progress-container">
                         <div class="progress-bar progress-bar-js">60%</div>
                     </div>
@@ -178,7 +232,7 @@
     
 </div>
 
-    <p>{{ about.content | linebreaks }}</p>
-    
+    <p>not found</p>
+    {% endif %}
 </section>
 {% endblock %}

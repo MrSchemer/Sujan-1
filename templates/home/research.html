@@ -1,0 +1,215 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Research{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background: #f8f9fa;
+        font-family: 'Open Sans', sans-serif;
+        color: #555;
+    }
+
+    .research-header {
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{% static "images/bannar.jpg" %}');
+        background-size: cover;
+        background-position: center;
+        color: white;
+        padding: 80px 0;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .research-header h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    .research-header hr {
+        width: 100px;
+        border: 2px solid #fff;
+        margin: 0 auto;
+    }
+
+    .blog-container {
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+        overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .blog-container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .image-wrapper {
+        position: relative;
+        overflow: hidden;
+        height: 250px;
+    }
+
+    .image-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+    }
+
+    .image-wrapper:hover img {
+        transform: scale(1.05);
+    }
+
+    .image-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(60, 141, 188, 0.8);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+
+    .image-wrapper:hover .image-overlay {
+        opacity: 1;
+    }
+
+    .panel-body {
+        padding: 25px;
+    }
+
+    .panel-body h4 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    .panel-body small {
+        color: #777;
+        display: block;
+        margin-bottom: 15px;
+    }
+
+    .panel-body p {
+        color: #555;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    .panel-body a {
+        color: #3c8dbc;
+        font-weight: 600;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .panel-body a:hover {
+        color: #296282;
+    }
+
+    .post-like {
+        float: right;
+        color: #777;
+        cursor: pointer;
+        transition: color 0.3s;
+    }
+
+    .post-like:hover {
+        color: #ff4757;
+    }
+
+    .popular-posts {
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .popular-posts h4 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: #333;
+        border-bottom: 2px solid #3c8dbc;
+        padding-bottom: 10px;
+    }
+
+    .media.popular-post {
+        margin-bottom: 15px;
+        padding: 10px;
+        border-radius: 8px;
+        transition: background 0.3s;
+    }
+
+    .media.popular-post:hover {
+        background: #f8f9fa;
+    }
+
+    .media.popular-post img {
+        width: 60px;
+        height: 60px;
+        border-radius: 8px;
+        margin-right: 15px;
+    }
+
+    .media-body {
+        font-size: 0.9rem;
+        color: #555;
+    }
+</style>
+
+<div class="research-header">
+    <h2>Our Research</h2>
+    <hr>
+</div>
+
+<div class="container">
+    <div class="row">
+        <!-- Main Content -->
+        <div class="col-md-8">
+            {% for research in researchs %}
+            <div class="blog-container">
+                <div class="image-wrapper">
+                    <img src="{{ research.image.url }}" alt="Photo of Blog">
+                    <div class="image-overlay"></div>
+                </div>
+                <div class="panel-body">
+                    <h4>{{ research.title }}</h4>
+                    <small>By <a href="#"><strong>Sujan Lamichhane</strong></a> | Post on {{ research.created_at }} </small>
+                    <p>
+                        {{ research.content| truncatewords:30 | safe }}
+                    </p>
+                    <a href="{{ research.url }}"><i class="fa fa-angle-double-right"></i> Continue reading</a>
+                    
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-md-4">
+            <div class="popular-posts">
+                <h4>POPULAR BLOGS</h4>
+                {% for blog in blogs %}
+                <div class="media popular-post">
+                    <a class="pull-left" href="{% url 'home:blog_details' blog.id %}">
+                        <img src="{{ blog.image.url }}" alt="Popular Post">
+                    </a>
+                    <div class="media-body">
+                        {{ blog.title }}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+{% endblock %}

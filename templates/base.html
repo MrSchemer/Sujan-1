@@ -28,25 +28,25 @@
                         <a class="nav-link" href="{% url 'home:home' %}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">About</a>
+                        <a class="nav-link" href="{% url 'home:about' %}">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">Blogs</a>
+                        <a class="nav-link" href="{% url 'home:blog' %}">Blogs</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">Publications</a>
+                        <a class="nav-link" href="{% url 'home:publication' %}">Publications</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">Research</a>
+                        <a class="nav-link" href="{% url 'home:research' %}">Research</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">Honors</a>
+                        <a class="nav-link" href="{% url 'home:honor' %}">Honors</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">Organizations</a>
+                        <a class="nav-link" href="{% url 'home:organizations' %}">Organizations</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">Contact</a>
+                        <a class="nav-link" href="{% url 'home:contact' %}">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -64,11 +64,14 @@
                 <div class="col-md-4">
                     <h5>Quick Links</h5>
                     <ul class="footer-links">
-                        <li><a href="">Home</a></li>
-                        <li><a href="">About</a></li>
-                        <li><a href="">Blogs</a></li>
-                        <li><a href="">Publications</a></li>
-                        <li><a href="">Contact</a></li>
+                        <li><a href="{% url 'home:home' %}">Home</a></li>
+                        <li><a href="{% url 'home:about' %}">About</a></li>
+                        <li><a href="{% url 'home:blog' %}">Blogs</a></li>
+                        <li><a href="{% url 'home:publication' %}">Publications</a></li>
+                        <li><a href="{% url 'home:research' %}">Research</a></li>
+                        <li><a href="{% url 'home:honor' %}">Honors</a></li>
+                        <li><a href="{% url 'home:organizations' %}">Organizations</a></li>
+                        <li><a href="{% url 'home:contact' %}">Contact</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
